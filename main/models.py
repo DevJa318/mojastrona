@@ -6,11 +6,17 @@ class Publisher(models.Model):
     name = models.CharField(max_length=60, help_text="Nazwa wydawnictwa")
     adres = models.CharField(max_length=60, help_text="Adres internetowy wydawnictwa")
 
+    def __str__(self):
+        return self.name
+
 
 class Book(models.Model):
     title = models.CharField('Title', max_length=230)
+    image = models.ImageField(upload_to='book/images/')
+    pdf = models.FileField(upload_to='book/pdf/')
     publication_date = models.DateField(verbose_name="Publication Date")
-    isbn = models.CharField(max_length=20, verbose_name="ISBN number", blank=True, null=True)
+    description = models.CharField(max_length=250)
+    isbn = models.CharField(max_length=20, verbose_name="ISBN number", blank=True)
     contributors = models.ManyToManyField('Contributor', through="BookContributor")
     publisher = models.ForeignKey("Publisher", on_delete=models.PROTECT)
     tag = models.ForeignKey("Tag", on_delete=models.PROTECT)
@@ -30,7 +36,8 @@ class BookContributor(models.Model):
     book = models.ForeignKey(Book, on_delete=models.PROTECT)
     contributor = models.ForeignKey(Contributor, on_delete=models.CASCADE)
     role = models.CharField(verbose_name="Rola jaką współtwórca odegrał przy tworzeniu książki",
-                            choices=ContributorRole.choices, max_length=20 )
+                            choices=ContributorRole.choices, max_length=20)
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=20, help_text="tag")
