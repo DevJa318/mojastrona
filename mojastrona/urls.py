@@ -18,9 +18,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from main import views as mainViews
-
+from mojastrona.views import profile
 
 urlpatterns = [
+    path('accounts/', include(('django.contrib.auth.urls', 'auth'), namespace='accounts')),
+    path('accounts/profile/', profile, name='profile'),
     path('admin/', admin.site.urls),
     #path('index/', mainViews.index, name='index'),
     path('', mainViews.home, name='home'),
