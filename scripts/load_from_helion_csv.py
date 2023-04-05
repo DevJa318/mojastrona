@@ -3,7 +3,7 @@
 
 
 import csv
-from main.models import Book, Publisher, BookLanguage, Author
+from main.models import Book, Publisher, BookLanguage, Author, Translator
 
 def run():
     with open('scripts/foundapi.csv') as file:

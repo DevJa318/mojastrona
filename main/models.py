@@ -15,6 +15,11 @@ class BookLanguage(models.Model):
     def __str__(self):
         return self.language
 
+class Translator(models.Model):
+    name = models.CharField(max_length=30)
+    def __str__(self):
+        return self.name
+
 class Book(models.Model):
     title = models.CharField('Title', max_length=230)
     subtitle = models.CharField('Subtitle', max_length=230, default='')
@@ -26,9 +31,15 @@ class Book(models.Model):
     isbn = models.CharField(max_length=20, verbose_name="ISBN number", blank=True)
     authors = models.ManyToManyField('Author')
     publisher = models.ForeignKey("Publisher", on_delete=models.PROTECT)
-    tag = models.ManyToManyField('Tag', default='')
+    tag = models.ManyToManyField('Tag', blank=True)
     pages = models.IntegerField(default=0)
     my_file_name = models.CharField(max_length=250, blank=True)
+    books_author_info = models.TextField(help_text=description, blank=True)
+    oryginal_title = models.CharField(max_length=270, blank=True)
+    amazon_link = models.URLField(blank=True)
+    translators = models.ManyToManyField('Translator', blank=True)
+    link_helion = models.URLField(blank=True)
+    code = models.URLField(blank=True)
 
     def __str__(self):
         return self.title
@@ -62,5 +73,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 #class Status(models.Model):
