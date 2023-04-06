@@ -3,7 +3,7 @@ from .models import *
 
 class BooksAdmin(admin.ModelAdmin):
     list_display = ('title', 'isbn', 'publication_date', 'publisher')
-    list_filter = ('publisher', 'publication_date')
+    list_filter = ('publisher', 'publication_date', 'language')
 
 # Register your models here.
 admin.site.register(Publisher)

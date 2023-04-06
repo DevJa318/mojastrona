@@ -22,13 +22,13 @@ class Translator(models.Model):
 
 class Book(models.Model):
     title = models.CharField('Title', max_length=230)
-    subtitle = models.CharField('Subtitle', max_length=230, default='')
+    subtitle = models.CharField('Subtitle', max_length=230, default='', blank=True)
     image = models.ImageField(upload_to='book/images/okladki/')
     pdf = models.FileField(upload_to='book/pdf/', blank=True)
     language = models.ForeignKey('BookLanguage', on_delete=models.CASCADE)
     publication_date = models.PositiveIntegerField(verbose_name="Publication Date")
     description = models.TextField(help_text='description')
-    isbn = models.CharField(max_length=20, verbose_name="ISBN number", blank=True)
+    isbn = models.CharField(max_length=20, verbose_name="ISBN number", blank=True, unique=True)
     authors = models.ManyToManyField('Author')
     publisher = models.ForeignKey("Publisher", on_delete=models.PROTECT)
     tag = models.ManyToManyField('Tag', blank=True)

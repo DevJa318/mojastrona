@@ -8,8 +8,11 @@
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{{ book.title }}</h5>
-        <p class="card-text">{{ book.description }}</p>
+
+        <p class="card-text">{{ book.description|linebreaks }}</p>
         <p class="card-text">
+
+
           {% if book.url %}
             <a href="{{ book.url }}" class="btn btn-primary">
               Book Link
