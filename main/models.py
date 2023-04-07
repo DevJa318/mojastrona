@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class Publisher(models.Model):
+    """NAZWA WYDAWCY"""
     name = models.CharField(max_length=60, help_text="Nazwa wydawnictwa")
     adres = models.CharField(max_length=60, help_text="Adres internetowy wydawnictwa", blank=True)
 
@@ -10,17 +12,20 @@ class Publisher(models.Model):
         return self.name
 
 class BookLanguage(models.Model):
+    """JĘZYK KSIĄŻKI"""
     language = models.CharField('Language', max_length=20, default='')
 
     def __str__(self):
         return self.language
 
 class Translator(models.Model):
+    """TŁUMACZ"""
     name = models.CharField(max_length=30)
     def __str__(self):
         return self.name
 
 class Book(models.Model):
+    """KSIĄŻKA"""
     title = models.CharField('Title', max_length=230)
     subtitle = models.CharField('Subtitle', max_length=230, default='', blank=True)
     image = models.ImageField(upload_to='book/images/okladki/')
@@ -44,31 +49,36 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+# Możliwe że nie potrzbne
+## class Contributor(models.Model):
+##     first_name = models.CharField('Name', max_length=50)
+##     last_name = models.CharField('Last Name', max_length=50)
 #
-# class Contributor(models.Model):
-#     first_name = models.CharField('Name', max_length=50)
-#     last_name = models.CharField('Last Name', max_length=50)
 #
-#
-# class BookContributor(models.Model):
-#     class ContributorRole(models.TextChoices):
-#         AUTHOR = "AUTHOR", "Author"
-#         EDITOR = "EDITOR", "Editor"
-#         REVIEwER = "REVIEWER", "Reviewer"
+# class UsersBookStatus(models.Model):
+#     class BookStatus(models.TextChoices):
+#         READ = "READ", "Read"
+#         IN_PROGRESS = "IN_PROGRESS", "In progress"
+#         POSTPONED = "POSTPONED", "Postponed"
+#         TO_READ = "TO_READ", "To read"
+#         INTERESTING = "INTERESTING", "Interesting"
+#         NOT_INTERESTING = "NOT_INTERESTING", "Not interesting"
 #
 #     book = models.ForeignKey(Book, on_delete=models.PROTECT)
-#     contributor = models.ForeignKey(Contributor, on_delete=models.CASCADE)
-#     role = models.CharField(verbose_name="Rola jaką współtwórca odegrał przy tworzeniu książki",
-#                             choices=ContributorRole.choices, max_length=20)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     status = models.CharField(verbose_name="Status przerobienia książki przez użytkownika",
+#                             choices=BookStatus.choices, max_length=20)
 
 
 class Tag(models.Model):
+    """TAGI"""
     name = models.CharField(max_length=40, help_text="tag")
 
     def __str__(self):
         return self.name
 
 class Author(models.Model):
+    """AUTORZY"""
     name = models.CharField(max_length=30)
 
     def __str__(self):

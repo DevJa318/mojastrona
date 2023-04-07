@@ -11,7 +11,9 @@
 
         <p class="card-text">{{ book.description|linebreaks }}</p>
         <p class="card-text">
-
+        <p class="card-text">{{ book.isbn }}</p>
+        <p class="card-text">{{ book.publication_date }}</p>
+        <p class="card-text">{% for author in book.authors.all %}{{ author }}<br/>{% endfor %}</p>
 
           {% if book.url %}
             <a href="{{ book.url }}" class="btn btn-primary">
