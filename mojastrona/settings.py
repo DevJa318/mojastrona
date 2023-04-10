@@ -132,4 +132,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # changes in User Model
-# AUTH_USER_MODEL = 'main.CustomUser'
+#AUTH_USER_MODEL = 'main.CustomUser'

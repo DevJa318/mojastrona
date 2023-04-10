@@ -27,6 +27,8 @@ urlpatterns = [
     #path('index/', mainViews.index, name='index'),
     path('', mainViews.home, name='home'),
     path('book/', include('main.urls')),
+    path('my_books/', mainViews.userbooks, name='userbooks'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL,

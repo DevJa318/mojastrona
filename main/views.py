@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-#from django.http import HttpResponse
-# Create your views here.
 from django.shortcuts import get_object_or_404
-from .models import Book
+from .models import Book, UsersBookStatus
+from django.contrib.auth.decorators import login_required
+
+# Create your views here.
 
 def home(request):
 	searchTerm = request.GET.get('searchBook')
@@ -18,3 +18,7 @@ def detail(request, book_id):
 	book = get_object_or_404(Book, pk=book_id)
 	return render(request, 'detail.html', {'book': book})
 
+@login_required
+def userbooks(request):
+	userbooks = UsersBookStatus.objects.filter(user=request.user)
+	return render(request, 'userbooks.html', {'userbooks': userbooks})

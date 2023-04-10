@@ -27,8 +27,8 @@
             <a class="nav-link" href="/accounts/login/#">Login</a>
             <a class="nav-link" href="#">Sign Up</a>
             {% else %}
-            <p>ZALOGOWANY jako: {{user}}</p>
-            <a class="nav-link" href="/accounts/profile">Mój profil</a>
+            <a class="nav-link" href="/my_books">Moje książki</a>
+            <a class="nav-link" href="/accounts/profile">Mój profil: {{user}}</a>
             <a class="nav-link" href="/accounts/logout">Wyloguj</a>
             {% endif %}
           </div>

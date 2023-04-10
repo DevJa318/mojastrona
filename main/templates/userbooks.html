@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Books{% endblock %}
+{% block content %}
+
+<h2>Użytkownik: {{user|title}}</h2>
+<br>
+<h2>Twoje książki:</h2>
+<br>
+<div>
+<!--<p>-->
+<!--Username: {{ request.user.username }} <br>-->
+<!--Date Joined: {{ request.user.date_joined }} <br>-->
+<!--Email: {{ request.user.email }}<br>-->
+<!--Last Login: {{ request.user.last_login }}<br>-->
+<!--</p>-->
+    <p>
+        {% if userbooks %}
+        {% for bookstatus in userbooks %}
+        <h3>Książki w Twojej keolekcji:</h3>
+        <p>{{ bookstatus.book }} {{ bookstatus.status }}</p>
+        {% endfor %}
+        {% else %}
+        <h3>Nie posiadasz jeszcze książek w swojej kolekcji</h3>
+        {% endif %}
+    </p>
+</div>
+{% endblock %}

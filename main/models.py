@@ -1,6 +1,7 @@
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 # from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 
 
@@ -51,6 +52,12 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+
+# class UserBooks(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     books = models.ManyToManyField('Book', through="UsersBookStatus")
+
+
 # class CustomUser(AbstractUser):
 #     pass
 
@@ -59,20 +66,20 @@ class Book(models.Model):
 ##     first_name = models.CharField('Name', max_length=50)
 ##     last_name = models.CharField('Last Name', max_length=50)
 #
-#
-# class UsersBookStatus(models.Model):
-#     class BookStatus(models.TextChoices):
-#         READ = "READ", "Read"
-#         IN_PROGRESS = "IN_PROGRESS", "In progress"
-#         POSTPONED = "POSTPONED", "Postponed"
-#         TO_READ = "TO_READ", "To read"
-#         INTERESTING = "INTERESTING", "Interesting"
-#         NOT_INTERESTING = "NOT_INTERESTING", "Not interesting"
-#
-#     book = models.ForeignKey(Book, on_delete=models.PROTECT)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     status = models.CharField(verbose_name="Status przerobienia książki przez użytkownika",
-#                             choices=BookStatus.choices, max_length=20)
+
+class UsersBookStatus(models.Model):
+    class BookStatus(models.TextChoices):
+        READ = "READ", "Read"
+        IN_PROGRESS = "IN_PROGRESS", "In progress"
+        POSTPONED = "POSTPONED", "Postponed"
+        TO_READ = "TO_READ", "To read"
+        INTERESTING = "INTERESTING", "Interesting"
+        NOT_INTERESTING = "NOT_INTERESTING", "Not interesting"
+
+    book = models.ForeignKey(Book, on_delete=models.PROTECT)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    status = models.CharField(verbose_name="Status przerobienia książki przez użytkownika",
+                            choices=BookStatus.choices, max_length=20)
 
 
 class Tag(models.Model):
@@ -91,4 +98,3 @@ class Author(models.Model):
 
 
 
-#class Status(models.Model):
